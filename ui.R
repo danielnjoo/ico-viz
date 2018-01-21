@@ -12,13 +12,26 @@ shinyUI(
     hr(),
     
     fluidRow(
-      column(3,
+      column(2,
              p("Choose input"),
              checkboxInput("length", "ICO length (days)", value=T),
              checkboxInput("size", "Team size")
       ),
-      column(9,
+      column(10,
              plotOutput('plot1')
+      )
+    ),
+    
+    hr(),
+    
+    fluidRow(
+      column(2,
+             p("Choose input"),
+             checkboxInput("industry", "Industry"),
+             checkboxInput("location", "Team location", value=T)
+      ),
+      column(10,
+             plotOutput('plot2')
       )
     )
 

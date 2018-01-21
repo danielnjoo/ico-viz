@@ -44,4 +44,31 @@ shinyServer(function(input, output, session) {
       xlab(xLabel)
     
   })
+  
+  output$plot2 <- renderPlot({
+    
+    if (input$industry==T){
+      plot2input <- data %>% 
+        group_by(`INDUSTRY`) %>% 
+        summarise(count=n()) %>% 
+        na.omit()
+      temp<-plot2input$`INDUSTRY`
+      xLabel <- "Industry"
+    } else if (input$location==T){
+      plot2input <- data %>% 
+        group_by(`TEAM LOCATION`) %>% 
+        summarise(count=n()) %>% 
+        na.omit()
+      temp<-plot2input$`TEAM LOCATION`
+      xLabel <- "Location"
+    } 
+    
+    plot2input %>% 
+      ggplot(aes(temp, count), fill=temp) + 
+        geom_bar(stat='identity') + 
+        theme(axis.text.x = element_text(angle=90, vjust=0.5,hjust=1))
+    
+    
+  })
+  
 })
