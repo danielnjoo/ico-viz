@@ -7,7 +7,7 @@ library(ggplot2)
 
 
 data <- gs_url("https://docs.google.com/spreadsheets/d/1ZtlHeHFO0nv5D0vkR8VdghVhsMgBaGlDAZhPVR6hqDQ/") %>% 
-    gs_read(col_names = c("NAME", "TICKER",	"WEB SITE","ICO LENGTH (DAYS)",	"TOTAL AMOUNT RAISED($$$)",	"HARD CAP",	"TIME TILL SOFT CAP WAS REACHED",	"CURRENCIES ACCEPTED",	"BOUNTY CAMPAIGN Y/N", "BOUNTY SIZE",	"FACEBOOK", "FACEBOOK FOLLOWERS",	"REDDIT",	"REDDIT FOLLOWERS",	"TELEGRAM",	"TELEGRAM FOLLOWERS",	"TWITTER",	"TWITTER FOLLOWERS",	"SLACK",	"SLACK FOLLOWERS",	"INDUSTRY",	"TEAM SIZE",	"TEAM LOCATION",	"WHITE PAPER"),
+    gs_read(col_names = c("NAME", "TICKER",	"WEB SITE","ICO LENGTH (DAYS)", "ICO END DATE",	"TOTAL AMOUNT RAISED($$$)",	"HARD CAP",	"TIME TILL SOFT CAP WAS REACHED",	"CURRENCIES ACCEPTED",	"BOUNTY CAMPAIGN Y/N", "BOUNTY SIZE",	"FACEBOOK", "FACEBOOK FOLLOWERS",	"REDDIT",	"REDDIT FOLLOWERS",	"TELEGRAM",	"TELEGRAM FOLLOWERS",	"TWITTER",	"TWITTER FOLLOWERS",	"SLACK",	"SLACK FOLLOWERS",	"INDUSTRY",	"TEAM SIZE",	"TEAM LOCATION",	"WHITE PAPER"),
             skip = 6) %>% as.data.frame()
 
 # sapply(data, typeof) # amt raised is a character
@@ -19,7 +19,7 @@ shinyServer(function(input, output, session) {
   
   output$the_data <- renderDataTable({
   
-    datatable(data[,c(1,5,22,23,24)])
+    datatable(data[,c(1,6,22,23,24,25)])
     
   })
 
