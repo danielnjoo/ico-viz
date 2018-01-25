@@ -89,9 +89,34 @@ shinyServer(function(input, output, session) {
         ggplot(aes(`SLACK FOLLOWERS`,`TOTAL AMOUNT RAISED($$$)`)) + xlab('Slack')
     } 
     
-    gg + geom_point()
+    gg + geom_point() + geom_smooth(method="lm", se=F)
     
     
   })
+  
+  output$click_info <- renderPrint({
+    #https://shiny.rstudio.com/gallery/plot-interaction-selecting-points.html
+    
+    if (input$facebook==T){
+      nearPoints(data, input$plot3_click, x="FACEBOOK FOLLOWERS", y="TOTAL AMOUNT RAISED($$$)") %>% 
+        select(NAME, FACEBOOK)
+    } else if (input$reddit==T){
+      nearPoints(data, input$plot3_click, x="REDDIT FOLLOWERS", y="TOTAL AMOUNT RAISED($$$)") %>% 
+        select(NAME, REDDIT)
+    } else if (input$telegram==T){
+      nearPoints(data, input$plot3_click, x="TELEGRAM FOLLOWERS", y="TOTAL AMOUNT RAISED($$$)") %>% 
+        select(NAME, TELEGRAM)
+    } else if (input$twitter==T){
+      nearPoints(data, input$plot3_click, x="TWITTER FOLLOWERS", y="TOTAL AMOUNT RAISED($$$)") %>% 
+        select(NAME, TWITTER)
+    } else if (input$slack==T){
+      nearPoints(data, input$plot3_click, x="SLACK FOLLOWERS", y="TOTAL AMOUNT RAISED($$$)") %>% 
+        select(NAME, SLACK)
+    } 
+    
+  })
+  
+ 
+  
   
 })
