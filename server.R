@@ -68,6 +68,29 @@ shinyServer(function(input, output, session) {
         geom_bar(stat='identity') + 
         theme(axis.text.x = element_text(angle=90, vjust=0.5,hjust=1))
     
+  })
+  
+  output$plot3 <- renderPlot({
+    
+    if (input$facebook==T){
+      gg <- data %>% 
+        ggplot(aes(`FACEBOOK FOLLOWERS`,`TOTAL AMOUNT RAISED($$$)`)) + xlab('Facebook')
+    } else if (input$reddit==T){
+      gg <- data %>% 
+        ggplot(aes(`REDDIT FOLLOWERS`,`TOTAL AMOUNT RAISED($$$)`)) + xlab('Reddit')
+    } else if (input$telegram==T){
+      gg <- data %>% 
+        ggplot(aes(`TELEGRAM FOLLOWERS`,`TOTAL AMOUNT RAISED($$$)`)) + xlab('Telegram')
+    } else if (input$twitter==T){
+      gg <- data %>% 
+        ggplot(aes(`TWITTER FOLLOWERS`,`TOTAL AMOUNT RAISED($$$)`)) + xlab('Twitter')
+    } else if (input$slack==T){
+      gg <- data %>% 
+        ggplot(aes(`SLACK FOLLOWERS`,`TOTAL AMOUNT RAISED($$$)`)) + xlab('Slack')
+    } 
+    
+    gg + geom_point()
+    
     
   })
   
